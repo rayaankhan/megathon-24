@@ -25,7 +25,7 @@ load_dotenv()
 
 os.environ["GOOGLE_API_KEY"] = os.getenv("GOOGLE_API_KEY")
 
-file_path = '../most_frequent_values.csv'
+file_path = 'most_frequent_values.csv'
 df = pd.read_csv(file_path)
 
 train_df, test_df = train_test_split(df, test_size=0.1, random_state=42)
@@ -248,7 +248,3 @@ def plot():
 
     # Return the image as a response
     return send_file(img, mimetype='image/png')
-
-
-if __name__ == "__main__":
-    app.run(debug=True)  # Set debug=True for development
