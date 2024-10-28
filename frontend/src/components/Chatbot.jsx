@@ -77,7 +77,7 @@ const Chatbot = () => {
   const sendResponsesToBackend = async () => {
     try {
       console.log("last", messages);
-      const res = await fetch("https://megathon-24.onrender.com/saveResponses", {
+      const res = await fetch("http://localhost:5000/saveResponses", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -103,7 +103,7 @@ const Chatbot = () => {
 
   const fetchQuestions = async () => {
     try {
-      const res = await fetch("https://megathon-24.onrender.com/getlistquestions", {
+      const res = await fetch("http://localhost:5000/getlistquestions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -136,7 +136,7 @@ const Chatbot = () => {
   useEffect(() => {
     // Fetch the plot from the backend
     const fetchPlot = async () => {
-      const response = await fetch("https://megathon-24.onrender.com/plot"); // Change the URL based on your backend setup
+      const response = await fetch("http://localhost:5000/plot"); // Change the URL based on your backend setup
       const blob = await response.blob();
       const url = URL.createObjectURL(blob);
       setPlotUrl(url);

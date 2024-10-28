@@ -197,13 +197,19 @@ matplotlib.use('Agg')  # Set backend to non-interactive
 
 @app.route('/plot')
 def plot():
+    # Check if the CSV file exists
+    csv_file = 'response_data.csv'
+    
+    if not os.path.exists(csv_file):
+        # If the file is not found, return a suitable message
+        return jsonify({'error': 'CSV file not found'}), 404
+
     # Load the CSV data
-    df = pd.read_csv('response_data.csv')
+    df = pd.read_csv(csv_file)
 
     # Convert 'time' column to datetime format and sort by time
     df['time'] = pd.to_datetime(df['time'])
     df = df.sort_values(by='time')
-    print(df)
 
     # Get unique categories
     categories = df['Category'].unique()
@@ -248,3 +254,8 @@ def plot():
 
     # Return the image as a response
     return send_file(img, mimetype='image/png')
+
+@app.route('/hello',methods=['GET'])
+def hello():
+    print("Hello, World!")
+    return jsonify({'message': 'Hello, World!'})
